@@ -18,6 +18,11 @@ on:
 jobs:
   my_testing:
     runs-on: ubuntu-latest
+    
+    env:
+     VAR1: "This is Job Level Variable1"
+     VAR2: "This is Job Level Variable2"
+    
     steps:
     
     - name: Print Hello Message in Testing
@@ -31,6 +36,14 @@ jobs:
        
     - name: Git clone repo
       uses: actions/checkout@v1
+      
+    - name: Print env vars
+      run: |
+       echo "Var 1 = ${{ env.VAR1 }}"
+       echo "Var 1 = ${{ env.VAR2 }}"
+       echo "Var 1 = $LOCAL_VAR"
+      env:
+       LOCAL_VAR: "This is Super Local Var"
        
     - name: List current folder
       run: ls -la
